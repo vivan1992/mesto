@@ -2,4 +2,12 @@
   width: 150px;
   height: 50px;
   background: url('../../../images/Add-Button.svg') center center/cover no-repeat;
+  cursor: pointer;
+  transition: opacity 350ms ease;
 }
+
+.profile__button-add:hover {
+  opacity: .6;
+}
+
+

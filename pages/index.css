@@ -27,3 +27,13 @@
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+
+@import url(../blocks/popap/popap.css);
+@import url(../blocks/popap/__overlay/popap__overlay.css);
+
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__close/form__close.css);
+@import url(../blocks/form/__title/form__title.css);
+@import url(../blocks/form/__name/form__name.css);
+@import url(../blocks/form/__about/form__about.css);
+@import url(../blocks/form/__button/form__button.css);

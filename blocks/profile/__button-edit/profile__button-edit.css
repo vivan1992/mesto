@@ -2,4 +2,10 @@
   width: 24px;
   height: 24px;
   background: url('../../../images/Edit-Button.svg') center center/cover no-repeat;
+  cursor: pointer;
+  transition: opacity 350ms ease;
+}
+
+.profile__button-edit:hover {
+  opacity: .6;
 }
