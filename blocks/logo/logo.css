@@ -3,3 +3,11 @@
   min-height: 33px;
   background: url('../../images/logo.svg') center center/cover no-repeat;
 }
+
+@media screen and (max-width: 767px) {
+  .logo {
+    width: 103.74px;
+    min-height: 24.4px;
+    margin-left: 27px;
+  }
+}

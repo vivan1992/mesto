@@ -9,3 +9,9 @@
   padding-bottom: 13px;
   margin-top: 54px;
 }
+
+@media screen and (max-width: 767px) {
+  .form__name {
+    margin-top: 75px;
+  }
+}
