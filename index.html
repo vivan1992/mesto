@@ -18,12 +18,12 @@
         <div class="profile__wrap-text">
           <div class="profile__wrap-title">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <div class="profile__button-edit"></div>
+            <button type="button" class="profile__button-edit"></button>
           </div>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
       </div>
-      <div class="profile__button-add"></div>
+      <button type="button" class="profile__button-add"></button>
     </section>
     <section class="cards">
       <ul class="cards__items">
@@ -31,7 +31,7 @@
           <img src="./images/karachaevsk.jpg" alt="карачаевск" class="cards__image">
           <div class="cards__wrap">
             <h2 class="cards__title">Карачаевск</h2>
-            <div class="cards__heart"></div>
+            <button type="button" class="cards__heart"></button>
           </div>
         </li>
         <li class="cards__item">
@@ -76,16 +76,16 @@
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
   <section class="popup">
-    <div class="popup__overlay">
-      <form class="form">
-        <div class="form__close"></div>
-        <h3 class="form__title">Редактировать профиль</h3>
-        <input name="name" type="text" class="form__name">
-        <input name="career" type="text" class="form__about" value="Исследователь океана">
-        <input type="submit" class="form__button">
+    <div class="popup__container">
+      <button type="button" class="popup__close"></button>
+      <h3 class="popup__title">Редактировать профиль</h3>
+      <form action="" name="chenge-profile" method="post" class="form">
+        <input name="name" type="text" class="form__input form__input_name_name" value="Жак-Ив Кусто">
+        <input name="career" type="text" class="form__input form__input_name_career" value="Исследователь океана">
+        <button type="submit" class="form__button">Сохранить</button>
       </form>
     </div>
   </section>
-  <script src="./script/script.js" defer></script>
+  <script src="./scripts/index.js" defer></script>
 </body>
 </html>

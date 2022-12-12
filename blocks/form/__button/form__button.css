@@ -9,7 +9,7 @@
   text-align: center;
   color: #FFFFFF;
   padding: 14px 0;
-  margin-top: 62px;
+  margin-top: 48px;
   cursor: pointer;
   transition: opacity 350ms ease;
 }
@@ -22,5 +22,6 @@
   .form__button {
     font-size: 14px;
     line-height: 17px;
+    margin-top: 45px;
   }
 }
