@@ -1,6 +1,5 @@
 const popupBtnEdit = document.querySelector('.profile__button-edit');
 const popupBtnAdd = document.querySelector('.profile__button-add');
-const closePopupBtns = document.querySelectorAll('.popup__close');
 const popups = document.querySelectorAll('.popup');
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
@@ -28,11 +27,6 @@ function likeCard(evt) {
 function deleteCard(evt) {
   evt.target.closest('.cards__item').remove();
 }
-
-// function clearValueInput() {
-//   placeInput.value = '';
-//   linkInput.value = '';
-// }
 
 function fillPopupEditInputs() {
   nameInput.value = profileName.textContent;
