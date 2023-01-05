@@ -98,8 +98,19 @@ popupBtnAdd.addEventListener('click', () => {
 });
 
 popups.forEach(item => {
-  item.querySelector('.popup__close').addEventListener('click', () => closePopup(item));
+  item.addEventListener('click', (evt) => {
+    if (evt.target === item || evt.target.classList.contains('popup__close')) {
+      closePopup(item);
+    }
+  });
+
+  document.addEventListener('keydown', (evt) => {
+    if (evt.code === 'Escape' && item.classList.contains('popup_opened')) {
+      closePopup(item);
+    }
+  });
 });
+
 
 formProfile.addEventListener('submit', handleEditFormSubmit);
 formCard.addEventListener('submit', handleAddCardSubmit);

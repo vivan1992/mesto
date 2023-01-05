@@ -35,7 +35,6 @@ function toggleButtonState(inputList, buttonElement) {
 }
 
 function setEventListeners(formElement, inputSelector, submitButtonSelector, inputErrorClass, errorClass) {
-  console.log('I work');
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
   toggleButtonState(inputList, buttonElement);
@@ -56,14 +55,12 @@ function enableValidation(objSettings) {
     });
     setEventListeners(formElement, inputSelector, submitButtonSelector, inputErrorClass, errorClass);
   });
-};
-
+}
 
 enableValidation({
   formSelector: '.form',
   inputSelector: '.form__input',
   submitButtonSelector: '.form__button',
-  // inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_active'
 });
