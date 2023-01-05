@@ -43,6 +43,15 @@ function closePopup(element) {
   element.classList.remove('popup_opened');
 }
 
+function closePopupClickEsc(evt) {
+  if (evt.code === 'Escape') {
+    popups.forEach(popup => {
+      closePopup(popup);
+    });
+    document.removeEventListener('keydown', closePopupClickEsc);
+  }
+}
+
 function fillPopupImageFields (link, descr) {
   popupImg.src = link;
   popupImg.alt = descr;
@@ -62,6 +71,7 @@ function createCard(title, link) {
   cardElementImage.addEventListener('click', () => {
     fillPopupImageFields(link, title);
     openPopup(popupImgPictureScale);
+    document.addEventListener('keydown', closePopupClickEsc);
   });
 
   return cardElement;
@@ -89,12 +99,14 @@ popupBtnEdit.addEventListener('click', () => {
   fillPopupEditInputs();
   btnFormEdit.disabled = false;
   openPopup(popupEdit);
+  document.addEventListener('keydown', closePopupClickEsc);
 });
 
 popupBtnAdd.addEventListener('click', () => {
   formCard.reset();
   btnFormAdd.disabled = true;
   openPopup(popupAdd);
+  document.addEventListener('keydown', closePopupClickEsc);
 });
 
 popups.forEach(item => {
@@ -103,14 +115,7 @@ popups.forEach(item => {
       closePopup(item);
     }
   });
-
-  document.addEventListener('keydown', (evt) => {
-    if (evt.code === 'Escape' && item.classList.contains('popup_opened')) {
-      closePopup(item);
-    }
-  });
 });
-
 
 formProfile.addEventListener('submit', handleEditFormSubmit);
 formCard.addEventListener('submit', handleAddCardSubmit);
