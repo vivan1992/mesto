@@ -41,7 +41,7 @@ function closePopup(element) {
   element.classList.remove('popup_opened');
 }
 
-function createPopupImg (link, descr) {
+function fillPopupImageFields (link, descr) {
   popupImg.src = link;
   popupImg.alt = descr;
   popupDescr.textContent = descr;
@@ -58,7 +58,7 @@ function createCard(title, link) {
   cardElement.querySelector('.cards__heart').addEventListener('click', likeCard);
   cardElement.querySelector('.cards__delete').addEventListener('click', deleteCard);
   cardElementImage.addEventListener('click', () => {
-    createPopupImg(link, title);
+    fillPopupImageFields(link, title);
     openPopup(popupImgPictureScale);
   });
 
