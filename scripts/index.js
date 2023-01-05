@@ -6,6 +6,8 @@ const popupAdd = document.querySelector('.popup_add');
 const popupImgPictureScale = document.querySelector('.popup_img');
 const popupImg = popupImgPictureScale.querySelector('.popup__img');
 const popupDescr = popupImgPictureScale.querySelector('.popup__descr');
+const btnFormEdit = popupEdit.querySelector('.form__button');
+const btnFormAdd = popupAdd.querySelector('.form__button');
 
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
@@ -85,11 +87,13 @@ function handleAddCardSubmit (evt) {
 
 popupBtnEdit.addEventListener('click', () => {
   fillPopupEditInputs();
+  btnFormEdit.disabled = false;
   openPopup(popupEdit);
 });
 
 popupBtnAdd.addEventListener('click', () => {
   formCard.reset();
+  btnFormAdd.disabled = true;
   openPopup(popupAdd);
 });
 
