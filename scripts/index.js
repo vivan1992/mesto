@@ -35,21 +35,21 @@ function fillPopupEditInputs() {
   jobInput.value = profileJob.textContent;
 }
 
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
+
 function openPopup(element) {
   element.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEscape);
 }
 
 function closePopup(element) {
   element.classList.remove('popup_opened');
-}
-
-function closePopupClickEsc(evt) {
-  if (evt.code === 'Escape') {
-    popups.forEach(popup => {
-      closePopup(popup);
-    });
-    document.removeEventListener('keydown', closePopupClickEsc);
-  }
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 function fillPopupImageFields (link, descr) {
@@ -71,7 +71,6 @@ function createCard(title, link) {
   cardElementImage.addEventListener('click', () => {
     fillPopupImageFields(link, title);
     openPopup(popupImgPictureScale);
-    document.addEventListener('keydown', closePopupClickEsc);
   });
 
   return cardElement;
@@ -99,14 +98,12 @@ popupBtnEdit.addEventListener('click', () => {
   fillPopupEditInputs();
   btnFormEdit.disabled = false;
   openPopup(popupEdit);
-  document.addEventListener('keydown', closePopupClickEsc);
 });
 
 popupBtnAdd.addEventListener('click', () => {
   formCard.reset();
   btnFormAdd.disabled = true;
   openPopup(popupAdd);
-  document.addEventListener('keydown', closePopupClickEsc);
 });
 
 popups.forEach(item => {
