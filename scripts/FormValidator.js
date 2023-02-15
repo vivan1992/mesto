@@ -38,6 +38,14 @@ class FormValidator {
     });
   }
 
+  resetValidation() {
+    this._toggleButtonState();
+
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+  }
+
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
       this._buttonElement.disabled = true;

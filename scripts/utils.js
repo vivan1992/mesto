@@ -26,6 +26,7 @@ export const initialCards = [
   ];
 
 export const config = {
+    formSelector: '.form',
     inputSelector: '.form__input',
     submitButtonSelector: '.form__button',
     inputErrorClass: 'form__input_type_error',

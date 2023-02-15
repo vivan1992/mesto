@@ -1,11 +1,9 @@
 class Card {
-  constructor(data, templateSelector, fillPopupImageFields, openPopup) {
+  constructor(data, templateSelector, handleCardClick) {
     this._title = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
-    this._fillPopupImageFields = fillPopupImageFields;
-    this._openPopup = openPopup;
-    this._popupImgPictureScale = document.querySelector('.popup_img');
+    this._handleCardClick = handleCardClick;
 
     this._deleteCard = this._deleteCard.bind(this);
   }
@@ -20,7 +18,7 @@ class Card {
     return cardElement;
   }
 
-  _likeCard(evt) {
+  _toggleLike(evt) {
     evt.target.classList.toggle('cards__heart_active');
   }
 
@@ -30,12 +28,11 @@ class Card {
 
   _setEventListeners() {
     this._element.querySelector('.cards__heart').addEventListener('click', (evt) => {
-      this._likeCard(evt);
+      this._toggleLike(evt);
     });
     this._element.querySelector('.cards__delete').addEventListener('click', this._deleteCard);
     this._elementImage.addEventListener('click', () => {
-      this._fillPopupImageFields(this._link, this._title);
-      this._openPopup(this._popupImgPictureScale);
+      this._handleCardClick(this._link, this._title);
     });
   }
 

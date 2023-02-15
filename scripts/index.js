@@ -10,24 +10,47 @@ const popupAdd = document.querySelector('.popup_add');
 const popupImgPictureScale = document.querySelector('.popup_img');
 const popupImg = popupImgPictureScale.querySelector('.popup__img');
 const popupDescr = popupImgPictureScale.querySelector('.popup__descr');
-const btnFormEdit = popupEdit.querySelector('.form__button');
-const btnFormAdd = popupAdd.querySelector('.form__button');
 
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 
-const formProfile = document.querySelector('.form_name_profile');
-const formCard = document.querySelector('.form_name_card');
-const nameInput = formProfile.querySelector('.form__input_name_name');
-const jobInput = formProfile.querySelector('.form__input_name_career');
-const placeInput = formCard.querySelector('.form__input_name_place');
-const linkInput = formCard.querySelector('.form__input_name_link');
+const profileForm = document.forms["profile-form"];
+const cardForm = document.forms["card-form"];
+
+const nameInput = profileForm.querySelector('.form__input_name_name');
+const jobInput = profileForm.querySelector('.form__input_name_career');
+const placeInput = cardForm.querySelector('.form__input_name_place');
+const linkInput = cardForm.querySelector('.form__input_name_link');
 
 const cardContainer = document.querySelector('.cards__items');
+
+const formValidators = {};
+
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    const formName = formElement.getAttribute('name');
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(config);
 
 function fillPopupEditInputs() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+}
+
+function createCard(config, templateSelector) {
+  const cardElement = new Card(config, templateSelector, handleCardClick);
+
+  return cardElement;
+}
+
+function addCard(config, templateSelector) {
+  cardContainer.prepend(createCard(config, templateSelector).generateCard());
 }
 
 function closeByEscape(evt) {
@@ -47,12 +70,6 @@ function closePopup(element) {
   document.removeEventListener('keydown', closeByEscape);
 }
 
-function fillPopupImageFields (link, descr) {
-  popupImg.src = link;
-  popupImg.alt = descr;
-  popupDescr.textContent = descr;
-}
-
 function handleEditFormSubmit (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
@@ -67,20 +84,25 @@ function handleAddCardSubmit (evt) {
     name: placeInput.value,
     link: linkInput.value
   };
-  const card = new Card (data, '#card', fillPopupImageFields, openPopup);
-  cardContainer.prepend(card.generateCard());
+  addCard(data, '#card');
   closePopup(popupAdd);
+}
+
+function handleCardClick (link, descr) {
+  popupImg.src = link;
+  popupImg.alt = descr;
+  popupDescr.textContent = descr;
+  openPopup(popupImgPictureScale);
 }
 
 popupBtnEdit.addEventListener('click', () => {
   fillPopupEditInputs();
-  btnFormEdit.disabled = false;
   openPopup(popupEdit);
 });
 
 popupBtnAdd.addEventListener('click', () => {
-  formCard.reset();
-  btnFormAdd.disabled = true;
+  cardForm.reset();
+  formValidators['card-form'].resetValidation();
   openPopup(popupAdd);
 });
 
@@ -92,16 +114,11 @@ popups.forEach(item => {
   });
 });
 
-formProfile.addEventListener('submit', handleEditFormSubmit);
-formCard.addEventListener('submit', handleAddCardSubmit);
+profileForm.addEventListener('submit', handleEditFormSubmit);
+cardForm.addEventListener('submit', handleAddCardSubmit);
 
 
 initialCards.reverse().forEach(item => {
-  const card = new Card(item, '#card', fillPopupImageFields, openPopup);
-  cardContainer.prepend(card.generateCard());
+  addCard(item, '#card');
 });
 
-const validateFormProfile = new FormValidator(config, formProfile);
-validateFormProfile.enableValidation();
-const validateFormCard = new FormValidator(config, formCard);
-validateFormCard.enableValidation();
