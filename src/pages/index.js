@@ -12,8 +12,6 @@ import {
   config,
   popupBtnEdit,
   popupBtnAdd,
-  nameInput,
-  jobInput,
   templateSelector,
   containerSelector,
   selectorPopupWithImage,
@@ -23,14 +21,16 @@ import {
   careerSelector
 } from "../utils/utils.js";
 
+function createCard(item) {
+  const card = new Card(item, templateSelector, handleCardClick);
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
 const cardList = new Section({
   items: initialCards.reverse(),
   renderer: (item) => {
-    const card = new Card(item, templateSelector, handleCardClick);
-
-    const cardElement = card.generateCard();
-
-    cardList.addItem(cardElement);
+    cardList.addItem(createCard(item));
   }
 },
 containerSelector);
@@ -51,15 +51,12 @@ const enableValidation = (config) => {
 
 enableValidation(config);
 
-function fillPopupEditInputs({name, career}) {
-  nameInput.value = name;
-  jobInput.value = career;
-}
+const popupWithImage = new PopupWithImage(selectorPopupWithImage);
+
+popupWithImage.setEventListeners();
 
 function handleCardClick (link, descr) {
-  const popupWithImage = new PopupWithImage(selectorPopupWithImage, link, descr);
-  popupWithImage.setEventListeners();
-  popupWithImage.open();
+  popupWithImage.open(link, descr);
 }
 
 const userInfo = new UserInfo({nameSelector, careerSelector});
@@ -76,21 +73,18 @@ popupEdit.setEventListeners();
 const popupAdd = new PopupWithForm({
   selectorPopup: selectorPopupAdd,
   handleFormSubmit: ({place, link}) => {
-    const card = new Card({
+
+    cardList.addItem(createCard({
       name: place,
       link: link
-    }, templateSelector, handleCardClick);
-
-    const cardElement = card.generateCard();
-
-    cardList.addItem(cardElement);
+    }));
   }
 });
 
 popupAdd.setEventListeners();
 
 popupBtnEdit.addEventListener('click', () => {
-  fillPopupEditInputs(userInfo.getUserInfo());
+  popupEdit.setInputValues(userInfo.getUserInfo());
   popupEdit.open();
 });
 

@@ -36,11 +36,6 @@ export const config = {
 export const popupBtnEdit = document.querySelector('.profile__button-edit');
 export const popupBtnAdd = document.querySelector('.profile__button-add');
 
-const profileForm = document.forms["profile-form"];
-
-export const nameInput = profileForm.querySelector('.form__input_name_name');
-export const jobInput = profileForm.querySelector('.form__input_name_career');
-
 export const selectors = {
   templateSelector: '#card',
   containerSelector: '.cards__items',
