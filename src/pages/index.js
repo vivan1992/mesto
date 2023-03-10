@@ -83,11 +83,11 @@ const popupDeleteCard = new PopupWithConfirmation({
     api.deleteCard(card)
     .then(() => {
       element.remove();
+      popupDeleteCard.close();
     })
   .catch(err => console.log(err))
   .finally(() => {
     popupDeleteCard.loading('Да');
-    popupDeleteCard.close();
   });
   }
 });
@@ -132,11 +132,13 @@ const popupEdit = new PopupWithForm({
   handleFormSubmit: (formData) => {
     popupEdit.loading('Сохранение...');
     api.setUserInfo(formData)
-    .then(({name, about}) => userInfo.setUserInfo({name, about}))
+    .then(({name, about}) => {
+      userInfo.setUserInfo({name, about});
+      popupEdit.close();
+    })
     .catch(err => console.log(err))
     .finally(() => {
       popupEdit.loading('Сохранить');
-      popupEdit.close();
     });
   }
 });
@@ -150,11 +152,11 @@ const popupAvatarEdit = new PopupWithForm({
     api.updateUserAvatar(formData)
     .then(res => {
       userInfo.setUserAvatar(res);
+      popupAvatarEdit.close();
     })
     .catch(err => console.log(err))
     .finally(() => {
       popupAvatarEdit.loading('Сохранить');
-      popupAvatarEdit.close();
     });
   }
 });
@@ -168,11 +170,11 @@ const popupAdd = new PopupWithForm({
     api.postCard({name: place, link: link})
     .then(res => {
       cardList.addItem(createCard(res, userInfo.getUserId()));
+      popupAdd.close();
     })
     .catch(err => console.log(err))
     .finally(() => {
       popupAdd.loading('Создать');
-      popupAdd.close();
     });
   }
 });

@@ -4,8 +4,8 @@ export default class Api {
     this._headers = headers;
   }
 
-  async _request(path, method = 'GET', body = null) {
-    return await fetch(this._url + path, {method, headers: this._headers, body})
+  _request(path, method = 'GET', body = null) {
+    return fetch(this._url + path, {method, headers: this._headers, body})
       .then(res => {
         if (res.ok) {
           return res.json();
@@ -50,5 +50,4 @@ export default class Api {
   updateUserAvatar(body) {
     return this._request('/users/me/avatar', 'PATCH', JSON.stringify(body));
   }
-  // другие методы работы с API
 }
