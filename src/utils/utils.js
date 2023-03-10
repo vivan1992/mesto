@@ -1,30 +1,3 @@
-export const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
-
 export const config = {
     formSelector: '.form',
     inputSelector: '.form__input',
@@ -35,6 +8,8 @@ export const config = {
 
 export const popupBtnEdit = document.querySelector('.profile__button-edit');
 export const popupBtnAdd = document.querySelector('.profile__button-add');
+export const popupBtnAvatar = document.querySelector('.profile__image-edit');
+
 
 export const selectors = {
   templateSelector: '#card',
@@ -43,7 +18,10 @@ export const selectors = {
   selectorPopupEdit: '.popup_edit',
   selectorPopupAdd: '.popup_add',
   nameSelector: '.profile__title',
-  careerSelector: '.profile__subtitle'
+  careerSelector: '.profile__subtitle',
+  imageSelector: '.profile__image',
+  selectorPopupAvatarEdit: '.popup_edit-avatar',
+  selectorPopupDeleteCard: '.popup_delete-card'
 };
 
 export const {
@@ -53,5 +31,12 @@ export const {
   selectorPopupEdit,
   selectorPopupAdd,
   nameSelector,
-  careerSelector
+  careerSelector,
+  imageSelector,
+  selectorPopupAvatarEdit,
+  selectorPopupDeleteCard
 } = {...selectors};
+
+export const token = 'a74fa796-219d-49f6-bd95-845d7cb5bd76';
+const id = 'cohort-61';
+export const baseUrl = `https://nomoreparties.co/v1/${id}`;

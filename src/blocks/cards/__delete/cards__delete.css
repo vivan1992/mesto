@@ -6,6 +6,7 @@
     height: 19px;
     background: url('../../../images/Trash.svg') center center/cover no-repeat;
     cursor: pointer;
+    display: none;
 }
 
 .cards__delete:hover {

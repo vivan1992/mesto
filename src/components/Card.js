@@ -1,11 +1,26 @@
 class Card {
-  constructor({name, link}, templateSelector, handleCardClick) {
+  constructor({name, link, likes, owner, _id}, currentUserId, templateSelector, handleCardClick, handleLikeClick, handleDeleteIconClick) {
     this._title = name;
     this._link = link;
+    this._likes = likes;
+    this._owner = owner;
+    this._id = _id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleLikeClick = handleLikeClick;
+    this._handleDeleteIconClick = handleDeleteIconClick;
+
+    this._isOwner = owner._id === currentUserId;
+
+    this._likeState = this._likes.some(obj => obj._id === currentUserId);
 
     this._deleteCard = this._deleteCard.bind(this);
+    this._updateLikeCounter = this._updateLikeCounter.bind(this);
+    this. _updateLikeState = this._updateLikeState.bind(this);
+  }
+
+  _getHeartElement() {
+    return this._element.querySelector('.cards__heart');
   }
 
   _getTemplate() {
@@ -18,16 +33,30 @@ class Card {
     return cardElement;
   }
 
+  _renderLike() {
+    if (this._likeState) {
+      this._getHeartElement().classList.add('cards__heart_active');
+    }
+  }
+
+  _updateLikeCounter(likes = this._likes) {
+    this._element.querySelector('.cards__like-counter').textContent = likes.length;
+  }
+
+  _updateLikeState() {
+    this._likeState = !this._likeState;
+  }
+
   _toggleLike(evt) {
-    evt.target.classList.toggle('cards__heart_active');
+    this._handleLikeClick(evt, this._id, this._likeState, this._updateLikeCounter, this._updateLikeState);
   }
 
   _deleteCard() {
-    this._element.remove();
+    this._handleDeleteIconClick(this._id, this._element);
   }
 
   _setEventListeners() {
-    this._element.querySelector('.cards__heart').addEventListener('click', (evt) => {
+    this._getHeartElement().addEventListener('click', (evt) => {
       this._toggleLike(evt);
     });
     this._element.querySelector('.cards__delete').addEventListener('click', this._deleteCard);
@@ -44,6 +73,11 @@ class Card {
     this._element.querySelector('.cards__title').textContent = this._title;
     this._elementImage.src = this._link;
     this._elementImage.alt = this._title;
+    this._updateLikeCounter();
+    this._renderLike();
+    if (this._isOwner) {
+      this._element.querySelector('.cards__delete').classList.add('cards__delete_visible');
+    }
 
     return this._element;
   }
